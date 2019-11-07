@@ -1,4 +1,6 @@
 const casual = require('casual');
+const fs = require('fs');
+const path = require('path');
 const images = require('./imageUrls');
 
 casual.seed(41);
@@ -11,10 +13,10 @@ const createPhotoArray = () => {
     let exists = true;
     while (exists === true) {
       index = casual.integer(0, 34);
-      exists = storage.index;
+      exists = storage[index];
     }
     result.push(images[index]);
-    storage.index = !storage.index;
+    storage[index] = !storage.index;
   }
   return result;
 };
