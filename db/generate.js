@@ -20,3 +20,21 @@ const createPhotoArray = () => {
   }
   return result;
 };
+
+const generateCsv = (num) => {
+  class Home {
+    constructor() {
+      this.photos = createPhotoArray();
+      this.description = casual.sentence;
+    }
+  }
+
+  let csv = '';
+
+  for (let i = 0; i < num; i += 1) {
+    const home = new Home();
+    csv += `"${home.photos}","${home.description}"\n`;
+  }
+
+  return csv;
+};
