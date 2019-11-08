@@ -24,4 +24,7 @@ coverage
 build/
 dist/
 
+db/config.js
+db/data.csv
 public/bundle.js
+

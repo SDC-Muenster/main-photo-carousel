@@ -1,16 +1,9 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/photos', { useNewUrlParser: true });
+const { Client } = require('pg');
+const config = require('./config');
 
+const client = new Client(config);
+client.connect()
+  .then(() => console.log('DATABASE CONNECTION SUCCESSFUL.'))
+  .catch((err) => console.log(`DATABASE CONNECTION FAILED WITH ERR ${err}`));
 
-let photoSchema = mongoose.Schema({ // using mongoose to create a schema
-  id: Number,
-  photoUrl: [String],            //String,
-  description: String
-});
-
-let Photo = mongoose.model('Photo', photoSchema);
- 
-
-
-
-module.exports = Photo;
+module.exports = client;
