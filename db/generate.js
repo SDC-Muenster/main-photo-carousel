@@ -22,7 +22,7 @@ const createPhotoArray = () => {
   return result;
 };
 
-const generateCsv = (num) => {
+const generateCsv = (num, loop) => {
   class Home {
     constructor() {
       this.photos = createPhotoArray();
@@ -34,7 +34,8 @@ const generateCsv = (num) => {
 
   for (let i = 0; i < num; i += 1) {
     const home = new Home();
-    result += `"{${home.photos}}","${home.description}"\n`;
+    const id = loop * num + i;
+    result += `${id}, "{${home.photos}}","${home.description}"\n`;
   }
 
   return result;
@@ -45,13 +46,13 @@ const writeDataToFile = () => {
   Promise.promisifyAll(stream);
 
   Promise.try(() => {
-    return stream.writeAsync('photos,description\n', 'utf8');
+    return stream.writeAsync('id,photos,description\n', 'utf8');
   }).then(() => {
-    let i = 1000;
-    while (i > 0) {
-      const data = generateCsv(10000);
+    let i = 0;
+    while (i < 1000) {
+      const data = generateCsv(10000, i);
       stream.writeAsync(data, 'utf8');
-      i -= 1;
+      i += 1;
     }
   }).then(() => {
     stream.end();
