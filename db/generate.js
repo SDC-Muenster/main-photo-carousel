@@ -32,7 +32,7 @@ const generateCsv = (num, loop) => {
 
   let result = '';
 
-  for (let i = 0; i < num; i += 1) {
+  for (let i = 1; i <= num; i += 1) {
     const home = new Home();
     const id = loop * num + i;
     result += `${id}, "{${home.photos}}","${home.description}"\n`;
